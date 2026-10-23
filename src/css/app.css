@@ -1,207 +1,80 @@
-/* Загальні параметри */
 :root {
-  --taskflow-primary: #2563eb;
-  --taskflow-success: #059669;
-  --taskflow-radius: 14px;
-}
-.page {
-  background: var(--f7-page-bg-color, #f5f6fa);
-}
-.app-content {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px 16px 100px;
-}
-.page-heading {
-  margin-bottom: 24px;
+  --f7-theme-color: #2563eb;
+  --f7-theme-color-rgb: 37, 99, 235;
+  --f7-theme-color-shade: #164fca;
+  --f7-theme-color-tint: #4a7ff0;
+  --f7-page-bg-color: #f5f7fb;
+  --f7-font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --f7-navbar-bg-color: #fff;
+  --f7-navbar-text-color: #172033;
+  --f7-navbar-border-color: #e3e9f2;
 }
 
-.page-heading h1 {
-  margin: 0 0 6px;
-  font-size: 26px;
-  font-weight: 700;
-}
-.page-heading p {
-  margin: 0;
-  font-size: 14px;
-  color: var(--f7-text-color-secondary, #64748b);
+* { box-sizing: border-box; }
+body { color: #172033; }
+h1, h2, h3, p { margin-top: 0; }
+h1 { margin-bottom: 10px; font-size: 30px; line-height: 1.15; font-weight: 750; }
+h2 { margin-bottom: 0; font-size: 20px; line-height: 1.3; font-weight: 700; }
+.app-content { width: 100%; max-width: 800px; margin: 0 auto; padding: 30px 24px 100px; }
+.page-intro { margin-bottom: 24px; }
+.page-intro > p:last-child { margin-bottom: 0; color: #607087; font-size: 15px; line-height: 1.6; }
+.eyebrow { margin-bottom: 12px; color: #2563eb; font-size: 11px; font-weight: 750; letter-spacing: 1.2px; }
+.stats-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 30px; }
+.stat-card { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 20px; background: #fff; border: 1px solid #e3e9f2; border-radius: 14px; }
+.stat-card > .icon { color: #2563eb; font-size: 25px; }
+.stat-value { color: #172033; font-size: 34px; line-height: 1.1; font-weight: 750; }
+.stat-card > span { color: #607087; font-size: 13px; line-height: 1.4; }
+.stat-completed > .icon { color: #059669; }
+.stat-pending > .icon { color: #b86b06; }
+.section-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.section-heading .link { flex-shrink: 0; font-size: 13px; font-weight: 600; }
+.tasks-panel { overflow: hidden; background: #fff; border: 1px solid #e3e9f2; border-radius: 14px; }
+.task-row { display: flex; align-items: flex-start; gap: 14px; padding: 19px 20px; }
+.task-row + .task-row { border-top: 1px solid #edf0f5; }
+.task-status-icon { flex-shrink: 0; margin-top: 1px; color: #8796ac; font-size: 24px; }
+.task-copy { min-width: 0; }
+.task-copy h3 { margin-bottom: 6px; font-size: 15px; line-height: 1.45; font-weight: 650; overflow-wrap: anywhere; }
+.task-copy p { margin-bottom: 10px; color: #607087; font-size: 13px; line-height: 1.5; }
+.task-status { display: inline-block; color: #607087; font-size: 12px; line-height: 1.4; }
+.is-completed .task-status-icon, .is-completed .task-status { color: #059669; }
+.primary-action { margin-top: 22px; border-radius: 10px; font-size: 14px; font-weight: 650; text-transform: none; }
+.helper-text { margin: 18px 0 0; color: #607087; font-size: 13px; line-height: 1.6; }
+.about-card, .info-card { padding: 26px; border: 1px solid #e3e9f2; border-radius: 14px; background: #fff; }
+.about-card { text-align: center; }
+.app-logo { margin-bottom: 18px; border-radius: 18px; }
+.about-description { max-width: 440px; margin: 0 auto 20px; color: #607087; font-size: 15px; line-height: 1.6; }
+.technology-list { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; }
+.technology-list span { padding: 6px 12px; border-radius: 7px; background: #edf3ff; color: #1d52ba; font-size: 12px; font-weight: 650; }
+.version { margin: 18px 0 0; color: #758299; font-size: 13px; }
+.info-card { margin-top: 18px; }
+.info-card > p { margin-top: 12px; margin-bottom: 0; color: #607087; font-size: 14px; line-height: 1.65; }
+.help-list { margin: 0; padding-left: 22px; font-size: 15px; line-height: 1.6; }
+.help-list li + li { margin-top: 13px; }
+.app-tabbar { --f7-toolbar-height: 64px; --f7-toolbar-bg-color: #fff; --f7-tabbar-link-inactive-color: #748197; border-top: 1px solid #e3e9f2; }
+.app-tabbar .toolbar-inner { max-width: 800px; margin: 0 auto; }
+.app-tabbar .link { display: flex; flex-direction: column; justify-content: center; gap: 5px; width: 33.333%; height: 100%; color: #748197; }
+.app-tabbar .icon { font-size: 23px; }
+.app-tabbar .tabbar-label { font-size: 11px; line-height: 1.2; }
+.app-tabbar .app-link-active { color: #2563eb; font-weight: 700; }
+a:focus-visible, button:focus-visible { outline: 3px solid #93b5fa; outline-offset: 3px; }
+
+@media (max-width: 479px) {
+  .app-content { padding: 24px 16px 100px; }
+  h1 { font-size: 27px; }
+  h2 { font-size: 18px; }
+  .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 26px; }
+  .stat-card { padding: 17px; }
+  .stat-pending { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 12px; }
+  .stat-pending .stat-value { font-size: 26px; }
+  .task-row { gap: 12px; padding: 18px 16px; }
+  .about-card, .info-card { padding: 22px 18px; }
 }
 
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin-bottom: 28px;
-}
-.stat-card {
-  padding: 20px;
-  border-radius: var(--taskflow-radius);
-  background: #eff6ff;
-  color: #1d4ed8;
-}
-.stat-card-success {
-  background: #ecfdf5;
-  color: #047857;
-}
-.stat-card .icon {
-  font-size: 24px;
-}
-.stat-value {
-  margin-top: 14px;
-  font-size: 30px;
-  font-weight: 700;
-}
-.stat-label {
-  margin-top: 4px;
-  font-size: 13px;
-}
-
-.section-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-.section-heading h2 {
-  margin: 0;
-  font-size: 17px;
-}
-.section-heading .link {
-  font-size: 13px;
-}
-.task-list {
-  overflow: hidden;
-  border-radius: var(--taskflow-radius);
-  background: var(--f7-card-bg-color, #fff);
-}
-.task-row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  min-height: 56px;
-  padding: 12px 16px;
-  border-bottom: 1px solid #e5e7eb;
-}
-.task-row:last-child {
-  border-bottom: 0;
-}
-.task-row .icon {
-  flex-shrink: 0;
-  font-size: 22px;
-  color: #94a3b8;
-}
-.task-row .completed-icon {
-  color: var(--taskflow-success);
-}
-.task-row-detail {
-  min-height: 80px;
-}
-.task-details {
-  min-width: 0;
-}
-.task-title {
-  font-size: 15px;
-  font-weight: 600;
-}
-.task-description {
-  margin-top: 4px;
-  font-size: 13px;
-  color: #64748b;
-}
-.task-status {
-  margin-top: 6px;
-  font-size: 12px;
-  color: var(--taskflow-primary);
-}
-.page-action {
-  margin-top: 24px;
-}
-.helper-text {
-  margin-top: 20px;
-  font-size: 13px;
-  line-height: 1.5;
-  color: #64748b;
-}
-
-.info-card {
-  padding: 20px;
-  margin-bottom: 14px;
-  border-radius: var(--taskflow-radius);
-  background: var(--f7-card-bg-color, #fff);
-}
-.info-card h2 {
-  margin: 0 0 12px;
-  font-size: 22px;
-}
-.info-card h3 {
-  margin: 0 0 12px;
-  font-size: 16px;
-}
-.info-card p {
-  margin: 0;
-  line-height: 1.6;
-}
-.app-logo {
-  margin-bottom: 16px;
-  color: var(--taskflow-primary);
-}
-.app-logo .icon {
-  font-size: 44px;
-}
-.technology-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.technology-list span {
-  padding: 7px 11px;
-  border-radius: 8px;
-  background: #f1f5f9;
-  color: #334155;
-  font-size: 13px;
-}
-
-.app-tabbar {
-  --f7-toolbar-height: 64px;
-}
-.app-tabbar .toolbar-inner {
-  right: 0;
-  max-width: 800px;
-  margin: 0 auto;
-}
-.app-tabbar .link {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  min-width: 0;
-  color: #64748b;
-  text-transform: none;
-}
-.app-tabbar .link .icon {
-  font-size: 22px;
-}
-.app-tab-label {
-  font-size: 11px;
-  line-height: 1.2;
-  white-space: nowrap;
-}
-.app-tabbar .app-link-active {
-  color: var(--taskflow-primary);
-}
 @media (max-width: 360px) {
-  .app-content {
-    padding: 16px 12px 90px;
-  }
-  .stat-card {
-    padding: 14px;
-  }
-  .stat-value {
-    font-size: 26px;
-  }
-  .app-tab-label {
-    font-size: 10px;
-  }
+  .app-content { padding-right: 12px; padding-left: 12px; }
+  .section-heading { gap: 8px; }
+  .section-heading h2 { font-size: 16px; }
+  .section-heading .link { font-size: 12px; }
+  .task-row { padding: 16px 13px; }
+  .task-copy h3 { font-size: 14px; }
 }

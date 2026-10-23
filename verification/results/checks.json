@@ -1,0 +1,235 @@
+{
+  "checkedAt": "2026-10-22T06:44:38.612Z",
+  "browserVersion": "153.0.8010.0",
+  "dev": true,
+  "build": true,
+  "initial": {
+    "total": 10,
+    "progress": 3,
+    "done": 3,
+    "todo": 4,
+    "percent": 30
+  },
+  "baseline": {
+    "total": 6,
+    "progress": 2,
+    "done": 2,
+    "todo": 2
+  },
+  "storeValidation": true,
+  "initialDataUnchanged": true,
+  "dateFallbacks": true,
+  "statusCycle": true,
+  "priorityCycle": true,
+  "crossPageSynchronization": true,
+  "filterCombinations": [
+    {
+      "status": "all",
+      "priority": "all",
+      "count": 10
+    },
+    {
+      "status": "all",
+      "priority": "low",
+      "count": 3
+    },
+    {
+      "status": "all",
+      "priority": "medium",
+      "count": 4
+    },
+    {
+      "status": "all",
+      "priority": "high",
+      "count": 3
+    },
+    {
+      "status": "todo",
+      "priority": "all",
+      "count": 4
+    },
+    {
+      "status": "todo",
+      "priority": "low",
+      "count": 1
+    },
+    {
+      "status": "todo",
+      "priority": "medium",
+      "count": 2
+    },
+    {
+      "status": "todo",
+      "priority": "high",
+      "count": 1
+    },
+    {
+      "status": "progress",
+      "priority": "all",
+      "count": 3
+    },
+    {
+      "status": "progress",
+      "priority": "low",
+      "count": 1
+    },
+    {
+      "status": "progress",
+      "priority": "medium",
+      "count": 1
+    },
+    {
+      "status": "progress",
+      "priority": "high",
+      "count": 1
+    },
+    {
+      "status": "done",
+      "priority": "all",
+      "count": 3
+    },
+    {
+      "status": "done",
+      "priority": "low",
+      "count": 1
+    },
+    {
+      "status": "done",
+      "priority": "medium",
+      "count": 1
+    },
+    {
+      "status": "done",
+      "priority": "high",
+      "count": 1
+    }
+  ],
+  "sortBothDirections": true,
+  "taskSelectionOnBothPages": true,
+  "resetOnReload": true,
+  "allCompletedEmptyState": true,
+  "responsive": [
+    {
+      "width": 320,
+      "page": "home",
+      "overflow": false,
+      "bottom": 900,
+      "height": 900,
+      "direct": true,
+      "active": 1
+    },
+    {
+      "width": 320,
+      "page": "tasks",
+      "overflow": false,
+      "bottom": 900,
+      "height": 900,
+      "direct": true,
+      "active": 1
+    },
+    {
+      "width": 320,
+      "page": "about",
+      "overflow": false,
+      "bottom": 900,
+      "height": 900,
+      "direct": true,
+      "active": 1
+    },
+    {
+      "width": 320,
+      "page": "help",
+      "overflow": false,
+      "bottom": 900,
+      "height": 900,
+      "direct": true,
+      "active": 1
+    },
+    {
+      "width": 375,
+      "page": "home",
+      "overflow": false,
+      "bottom": 900,
+      "height": 900,
+      "direct": true,
+      "active": 1
+    },
+    {
+      "width": 375,
+      "page": "tasks",
+      "overflow": false,
+      "bottom": 900,
+      "height": 900,
+      "direct": true,
+      "active": 1
+    },
+    {
+      "width": 375,
+      "page": "about",
+      "overflow": false,
+      "bottom": 900,
+      "height": 900,
+      "direct": true,
+      "active": 1
+    },
+    {
+      "width": 375,
+      "page": "help",
+      "overflow": false,
+      "bottom": 900,
+      "height": 900,
+      "direct": true,
+      "active": 1
+    },
+    {
+      "width": 768,
+      "page": "home",
+      "overflow": false,
+      "bottom": 900,
+      "height": 900,
+      "direct": true,
+      "active": 1
+    },
+    {
+      "width": 768,
+      "page": "tasks",
+      "overflow": false,
+      "bottom": 900,
+      "height": 900,
+      "direct": true,
+      "active": 1
+    },
+    {
+      "width": 768,
+      "page": "about",
+      "overflow": false,
+      "bottom": 900,
+      "height": 900,
+      "direct": true,
+      "active": 1
+    },
+    {
+      "width": 768,
+      "page": "help",
+      "overflow": false,
+      "bottom": 900,
+      "height": 900,
+      "direct": true,
+      "active": 1
+    }
+  ],
+  "navigation": true,
+  "helpBackLinks": true,
+  "registration": {
+    "scope": "http://127.0.0.1:4176/",
+    "state": "activated"
+  },
+  "offlineReload": true,
+  "offlineUpdates": true,
+  "offlineNavigation": true,
+  "manifestErrors": [],
+  "installabilityErrors": [],
+  "browserErrors": [],
+  "consoleIssues": [],
+  "failedResponses": []
+}

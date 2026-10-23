@@ -1,0 +1,74 @@
+.tf3-page { --f7-page-bg-color: #0b1423; }
+.tf3-container { width: 100%; max-width: 1180px; margin: 0 auto; padding: 20px 18px 48px; color: #edf4ff; }
+.tf3-hero { padding: 28px; border: 1px solid #28435f; border-radius: 18px; background: linear-gradient(135deg, #183451, #101d31 65%, #0d1728); }
+.tf3-eyebrow { margin: 0; color: #58c7ef; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; line-height: 1.6; text-transform: uppercase; }
+.tf3-hero h1 { margin: 12px 0; color: #fff; font-size: 29px; line-height: 1.25; }
+.tf3-hero p:not(.tf3-eyebrow) { margin: 0; color: #adbed3; line-height: 1.6; }
+.tf3-stat-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+.tf3-stat { display: flex; flex-direction: column; gap: 10px; padding: 22px; border: 1px solid #263a52; border-radius: 14px; background: #142237; }
+.tf3-stat-label { color: #aabed5; font-size: 13px; }
+.tf3-stat strong { color: #fff; font-size: 32px; line-height: 1.1; }
+.tf3-completion { margin-top: 16px; padding: 18px 22px; border: 1px solid #263a52; border-radius: 14px; background: #142237; }
+.tf3-completion-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; color: #b7cbe0; font-size: 13px; }
+.tf3-completion-heading strong { color: #a8efd0; font-size: 18px; }
+.tf3-progress { height: 7px; overflow: hidden; border-radius: 8px; background: #293d54; }
+.tf3-progress span { display: block; height: 100%; border-radius: inherit; background: #65d8af; }
+.tf3-section { margin-top: 28px; }
+.tf3-section-heading { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 18px; }
+.tf3-section-heading h2 { margin: 6px 0 0; color: #f3f7ff; font-size: 21px; }
+.tf3-task-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+.tf3-task-card { --f7-card-bg-color: #142237; margin: 0; overflow: hidden; border: 1px solid #2a405b; border-radius: 15px; background: #142237; box-shadow: none; color: #eef5ff; }
+.tf3-task-card .card-content { display: flex; flex-direction: column; height: 100%; padding: 20px; background: transparent; }
+.tf3-card-heading { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.tf3-card-title { flex: 1; min-width: 170px; margin: 0; color: #fff; font-size: 17px; line-height: 1.4; overflow-wrap: anywhere; }
+.tf3-card-description { margin: 16px 0; color: #aabbd0; font-size: 14px; line-height: 1.6; }
+.tf3-task-card .tf3-card-description { flex: 1; }
+.tf3-card-meta { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; padding: 14px 0; border-top: 1px solid #293d54; border-bottom: 1px solid #293d54; }
+.tf3-meta-item { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.tf3-meta-label, .tf3-meta-date { color: #aabbd0; font-size: 12px; }
+.tf3-badge { display: inline-flex; align-items: center; justify-content: center; padding: 5px 11px; border-radius: 20px; font-size: 11px; font-weight: 700; line-height: 1.4; white-space: nowrap; }
+.tf3-status--todo { color: #bbd5ff; background: #253c60; }
+.tf3-status--progress { color: #ffdc93; background: #59401e; }
+.tf3-status--done { color: #a8efd0; background: #1c4d3c; }
+.tf3-status--unknown, .tf3-priority--unknown { color: #d6dfec; background: #39465a; }
+.tf3-priority--low { color: #a8efd0; background: #1c4d3c; }
+.tf3-priority--medium { color: #ffdc93; background: #59401e; }
+.tf3-priority--high { color: #ffb5cb; background: #62283b; }
+.tf3-card-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.tf3-action { display: inline-flex; align-items: center; justify-content: center; width: auto; min-height: 44px; padding: 9px 13px; border: 1px solid #365371; border-radius: 9px; background: #20344b; color: #deebff; font-family: inherit; font-size: 12px; font-weight: 600; line-height: 1.4; cursor: pointer; }
+.tf3-action--primary { border-color: #28789c; background: #12668b; color: #fff; }
+.tf3-action:hover { background: #315474; }
+.tf3-action--primary:hover { background: #1688b6; }
+.tf3-action:focus-visible, .tf3-filter-button:focus-visible, .tf3-sort select:focus-visible { outline: 2px solid #7fe0ff; outline-offset: 3px; }
+.tf3-filters { display: flex; flex-direction: column; gap: 18px; margin-top: 20px; padding: 20px; border: 1px solid #293e58; border-radius: 14px; background: #142237; }
+.tf3-filter-group { display: flex; flex-direction: column; gap: 10px; }
+.tf3-filter-title, .tf3-sort label { color: #d9e8fa; font-size: 13px; font-weight: 700; }
+.tf3-filter-buttons { display: flex; flex-wrap: wrap; gap: 9px; }
+.tf3-filter-button { width: auto; min-height: 44px; padding: 9px 15px; border: 1px solid #334b67; border-radius: 9px; background: #1e3047; color: #c7d8ee; font-family: inherit; font-size: 12px; line-height: 1.4; cursor: pointer; }
+.tf3-filter-button.is-active { border-color: #35b4e5; background: #125d83; color: #fff; }
+.tf3-sort { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; padding-top: 16px; border-top: 1px solid #293d54; }
+.tf3-sort select { width: 310px; max-width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid #365371; border-radius: 9px; background: #20344b; color: #deebff; font: inherit; font-size: 12px; color-scheme: dark; }
+.tf3-counter { padding: 7px 12px; border: 1px solid #324b66; border-radius: 9px; color: #bcd0e9; font-size: 12px; white-space: nowrap; }
+.tf3-empty { padding: 30px; border: 1px dashed #38516d; border-radius: 12px; color: #aebfd4; text-align: center; line-height: 1.6; }
+.tf3-state-note { margin: 24px 0 0; color: #8ea5bf; font-size: 12px; line-height: 1.6; }
+.tf3-dialog { width: min(540px, calc(100% - 32px)); max-height: calc(100% - 48px); margin: auto; padding: 24px; border: 1px solid #365371; border-radius: 18px; background: #142237; color: #edf4ff; font-family: inherit; }
+.tf3-dialog::backdrop { background: rgb(2 8 17 / 78%); }
+.tf3-dialog-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+.tf3-dialog h2 { font-size: 21px; line-height: 1.4; }
+.tf3-dialog-date { margin: 18px 0 0; color: #aabbd0; font-size: 13px; }
+
+@media (max-width: 740px) {
+  .tf3-task-grid { grid-template-columns: 1fr; }
+  .tf3-hero { padding: 20px; }
+  .tf3-hero h1 { font-size: 24px; }
+  .tf3-stat { padding: 16px 12px; }
+}
+
+@media (max-width: 520px) {
+  .tf3-stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .tf3-stat { padding: 16px; }
+  .tf3-stat strong { font-size: 25px; }
+  .tf3-stat-label { font-size: 12px; }
+  .tf3-container { padding-left: 12px; padding-right: 12px; }
+  .tf3-task-card .card-content, .tf3-filters, .tf3-dialog { padding: 18px; }
+}

@@ -1,31 +1,23 @@
 <template>
   <f7-page name="about">
     <f7-navbar title="Про застосунок" />
-    <div class="app-content">
-      <div class="page-heading">
-        <h1>Про TaskFlow</h1>
-        <p>Інформація про застосунок</p>
-      </div>
-      <div class="info-card">
-        <div class="app-logo"><f7-icon f7="checkmark_circle_fill" /></div>
-        <h2>TaskFlow</h2>
-        <p>Прогресивний вебзастосунок для організації завдань.</p>
-      </div>
-      <div class="info-card">
-        <h3>Використані технології</h3>
-        <div class="technology-list">
-          <span>Vue 3</span><span>Framework7</span><span>Vite</span
-          ><span>PWA</span>
+    <template #fixed><AppTabbar active="about" /></template>
+    <main class="app-content">
+      <section class="about-card">
+        <img src="/icons/icon-192.png" width="72" height="72" alt="Логотип TaskFlow" class="app-logo" />
+        <h1>TaskFlow</h1>
+        <p class="about-description">Навчальний PWA-застосунок для керування завданнями, пріоритетами й контролю виконання.</p>
+        <div class="technology-list" aria-label="Технології">
+          <span>Vue 3</span><span>Framework7</span><span>Vite</span><span>PWA</span>
         </div>
-      </div>
-      <div class="info-card">
-        <h3>Версія</h3>
-        <p>1.0.0 — навчальний проєкт</p>
-      </div>
-    </div>
-    <template #fixed>
-      <AppTabbar active="about" />
-    </template>
+        <p class="version">Версія 1.0.0</p>
+      </section>
+      <section class="info-card">
+        <h2>Завдання завжди поруч</h2>
+        <p>Застосунок адаптується до екрана телефона й комп’ютера. Після першого завантаження зібрана версія доступна офлайн.</p>
+        <f7-button fill large href="/help/" class="primary-action">Правила використання</f7-button>
+      </section>
+    </main>
   </f7-page>
 </template>
 

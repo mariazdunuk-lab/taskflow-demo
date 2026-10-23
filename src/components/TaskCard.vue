@@ -1,37 +1,49 @@
-<template>
-  <article class="task-card">
-    <div class="task-card__top">
-      <span class="task-card__status" :class="`status-${task.status}`">
-        {{ statusText }}
-      </span>
-      <span class="task-card__priority" :class="`priority-${task.priority}`">
-        {{ priorityText }}
-      </span>
-    </div>
-    <h3 class="task-card__title">{{ task.title }}</h3>
-    <p class="task-card__description">{{ task.description }}</p>
-  </article>
-</template>
-
 <script setup>
-import { computed } from 'vue';
+import { computed, useId } from 'vue';
+import StatusBadge from './StatusBadge.vue';
+import PriorityBadge from './PriorityBadge.vue';
+import { formatDueDate } from '../utils/tasks.js';
 
-const props = defineProps({
-  task: { type: Object, required: true },
-});
+const props = defineProps({ task: { type: Object, required: true } });
+const emit = defineEmits(['status-change', 'priority-change', 'task-select']);
+const titleId = useId();
+const statuses = ['todo', 'progress', 'done'];
+const priorities = ['low', 'medium', 'high'];
+const dueDateLabel = computed(() => formatDueDate(props.task.dueDate));
+const statusActionLabel = computed(() => ({
+  todo: 'Взяти в роботу',
+  progress: 'Завершити',
+  done: 'Повернути в план',
+}[props.task.status] ?? 'Змінити статус'));
 
-const statusLabels = {
-  todo: 'Заплановано',
-  progress: 'У роботі',
-  done: 'Виконано',
-};
+function changeStatus() {
+  const nextIndex = (statuses.indexOf(props.task.status) + 1) % statuses.length;
+  emit('status-change', { id: props.task.id, status: statuses[nextIndex] });
+}
 
-const priorityLabels = {
-  low: 'Низький',
-  medium: 'Середній',
-  high: 'Високий',
-};
-
-const statusText = computed(() => statusLabels[props.task.status] ?? 'Невідомо');
-const priorityText = computed(() => priorityLabels[props.task.priority] ?? 'Не визначено');
+function changePriority() {
+  const nextIndex = (priorities.indexOf(props.task.priority) + 1) % priorities.length;
+  emit('priority-change', { id: props.task.id, priority: priorities[nextIndex] });
+}
 </script>
+
+<template>
+  <f7-card class="tf3-task-card" :data-task-id="task.id" role="article" :aria-labelledby="titleId">
+    <f7-card-content>
+      <div class="tf3-card-heading">
+        <h3 :id="titleId" class="tf3-card-title">{{ task.title }}</h3>
+        <StatusBadge :status="task.status" />
+      </div>
+      <p class="tf3-card-description">{{ task.description }}</p>
+      <div class="tf3-card-meta">
+        <div class="tf3-meta-item"><span class="tf3-meta-label">Пріоритет</span><PriorityBadge :priority="task.priority" /></div>
+        <div class="tf3-meta-item"><span class="tf3-meta-label">Термін</span><time class="tf3-meta-date" :datetime="task.dueDate || undefined">{{ dueDateLabel }}</time></div>
+      </div>
+      <div class="tf3-card-actions">
+        <button type="button" class="tf3-action tf3-action--primary" @click="changeStatus">{{ statusActionLabel }}</button>
+        <button type="button" class="tf3-action" @click="changePriority">Змінити пріоритет</button>
+        <button type="button" class="tf3-action" @click="emit('task-select', { id: task.id })">Докладніше</button>
+      </div>
+    </f7-card-content>
+  </f7-card>
+</template>
