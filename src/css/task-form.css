@@ -1,0 +1,50 @@
+.tf4-new-task, .tf4-save, .tf4-close, .tf4-cancel, .tf4-clear {
+  display: inline-flex; align-items: center; justify-content: center; width: auto; min-height: 44px;
+  padding: 11px 16px; border: 1px solid #46617d; border-radius: 9px; background: #20344b;
+  color: #d9e9fd; font-family: inherit; font-size: 13px; font-weight: 600; line-height: 1.4; cursor: pointer;
+}
+.tf4-new-task, .tf4-save { border-color: #3bb9e9; background: #087cad; color: #fff; }
+.tf4-new-task { margin-top: 19px; }
+.tf4-new-task:hover, .tf4-save:hover { background: #1394c9; }
+.tf4-close:hover, .tf4-cancel:hover, .tf4-clear:hover { background: #315474; }
+.tf4-form-section { margin-top: 22px; scroll-margin-top: 80px; }
+.tf4-form-panel { padding: 22px; border: 1px solid #2a405b; border-radius: 15px; background: #142237; color: #edf4ff; }
+.tf4-form-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
+.tf4-form-heading h2 { margin: 8px 0 0; color: #fff; font-size: 22px; line-height: 1.3; }
+.tf4-form-note { margin: 9px 0 0; color: #aabed5; font-size: 12px; }
+.tf4-required { color: #ffb5cb; }
+.tf4-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.tf4-field { display: flex; flex-direction: column; min-width: 0; gap: 7px; }
+.tf4-field--wide { grid-column: 1 / -1; }
+.tf4-field label { color: #e1efff; font-size: 13px; font-weight: 700; line-height: 1.5; }
+.tf4-field input, .tf4-field textarea, .tf4-field select {
+  box-sizing: border-box; width: 100%; max-width: 100%; min-width: 0; min-height: 44px;
+  padding: 11px 12px; border: 1px solid #42617d; border-radius: 9px; background: #0c192b;
+  color: #f4f9ff; color-scheme: dark; font: inherit; font-size: 14px; line-height: 1.5;
+}
+.tf4-field textarea { min-height: 100px; resize: vertical; }
+.tf4-field input::placeholder, .tf4-field textarea::placeholder { color: #8fa7bf; opacity: 1; }
+.tf4-field input:focus, .tf4-field textarea:focus, .tf4-field select:focus { outline: 2px solid #49bce7; outline-offset: 1px; }
+.tf4-field [aria-invalid="true"] { border-color: #ed7184; }
+.tf4-field small { color: #aabed5; font-size: 12px; line-height: 1.5; }
+.tf4-error { margin: 0; color: #ffb5c0; font-size: 13px; line-height: 1.5; }
+.tf4-preview { min-width: 0; padding: 15px 17px; border: 1px dashed #3b759a; border-radius: 12px; background: #122d42; overflow-wrap: anywhere; }
+.tf4-preview > strong { color: #8bdff7; font-size: 12px; }
+.tf4-preview h3 { margin: 10px 0; color: #fff; font-size: 18px; line-height: 1.4; }
+.tf4-preview-description { margin: 0 0 12px; color: #b5cfdf; font-size: 14px; white-space: pre-wrap; }
+.tf4-preview-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; color: #b5cfdf; font-size: 12px; }
+.tf4-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.tf4-feedback { margin: 18px 0 0; padding: 12px 15px; border: 1px solid #3b806e; border-radius: 10px; background: #143e34; color: #baf4db; font-size: 14px; overflow-wrap: anywhere; }
+.tf4-feedback--error { border-color: #a65a6b; background: #402431; color: #ffd2db; }
+.tf4-new-task:focus-visible, .tf4-close:focus-visible, .tf4-save:focus-visible,
+.tf4-cancel:focus-visible, .tf4-clear:focus-visible { outline: 2px solid #83e9ff; outline-offset: 3px; }
+.tf3-card-description { overflow-wrap: anywhere; white-space: pre-wrap; }
+@media (max-width: 740px) {
+  .tf4-form { grid-template-columns: 1fr; }
+  .tf4-form-panel { padding: 16px; }
+  .tf4-form-heading h2 { font-size: 19px; }
+}
+@media (max-width: 380px) {
+  .tf4-form-heading { flex-wrap: wrap; }
+}
+
