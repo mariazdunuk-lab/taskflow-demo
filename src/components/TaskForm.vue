@@ -2,7 +2,7 @@
 import { computed, nextTick, reactive, ref, useId } from 'vue';
 import StatusBadge from './StatusBadge.vue';
 import PriorityBadge from './PriorityBadge.vue';
-import { getTaskErrors, localToday } from '../store/tasks.js';
+import { getTaskErrors } from '../store/tasks.js';
 import { formatDueDate } from '../utils/tasks.js';
 
 const props = defineProps({ task: { type: Object, default: null } });
@@ -11,7 +11,6 @@ const prefix = useId();
 const titleInput = ref(null);
 const formElement = ref(null);
 const showErrors = ref(false);
-const today = ref(localToday());
 const isEditing = computed(() => props.task !== null);
 const defaults = () => ({
   title: '', description: '', status: 'todo', priority: 'medium', category: 'study', dueDate: '',
@@ -25,12 +24,9 @@ const form = reactive({
   dueDate: props.task?.dueDate ?? '',
 });
 const categories = { study: 'Навчання', work: 'Робота', personal: 'Особисте' };
-const errors = computed(() => getTaskErrors(form, { editingTask: props.task, today: today.value }));
+const errors = computed(() => getTaskErrors(form, { editingTask: props.task }));
 const titleRemaining = computed(() => 80 - form.title.length);
-const descriptionRemaining = computed(() => 300 - form.description.length);
-const dateHint = computed(() => isEditing.value
-  ? 'Можна залишити попередній термін. Для зміни оберіть сьогоднішню або майбутню дату.'
-  : 'Оберіть сьогоднішню або майбутню дату.');
+const descriptionRemaining = computed(() => 500 - form.description.length);
 
 function fieldId(field) {
   return prefix + '-' + field;
@@ -51,13 +47,11 @@ async function clearForm() {
   if (isEditing.value) return;
   Object.assign(form, defaults());
   showErrors.value = false;
-  today.value = localToday();
   await nextTick();
   focusTitle();
 }
 
 async function submitForm() {
-  today.value = localToday();
   showErrors.value = true;
   if (Object.keys(errors.value).length) {
     await nextTick();
@@ -98,10 +92,10 @@ defineExpose({ focusTitle });
       </div>
       <div class="tf4-field tf4-field--wide">
         <label :for="fieldId('description')">Опис</label>
-        <textarea :id="fieldId('description')" v-model.trim="form.description" name="description" rows="3" maxlength="300"
+        <textarea :id="fieldId('description')" v-model.trim="form.description" name="description" rows="3" maxlength="500"
           placeholder="Що потрібно зробити?" :aria-invalid="showErrors && !!errors.description"
           :aria-describedby="describedBy('description', true)"></textarea>
-        <small :id="fieldId('description-hint')">Необов'язкове поле. Залишилося: {{ descriptionRemaining }} із 300 символів.</small>
+        <small :id="fieldId('description-hint')">Необов'язкове поле. Залишилося: {{ descriptionRemaining }} із 500 символів.</small>
         <p v-if="showErrors && errors.description" :id="fieldId('description-error')" class="tf4-error" role="alert">{{ errors.description }}</p>
       </div>
       <div class="tf4-field">
@@ -133,11 +127,11 @@ defineExpose({ focusTitle });
         <p v-if="showErrors && errors.category" :id="fieldId('category-error')" class="tf4-error" role="alert">{{ errors.category }}</p>
       </div>
       <div class="tf4-field">
-        <label :for="fieldId('dueDate')">Дата завершення <span class="tf4-required" aria-hidden="true">*</span></label>
-        <input :id="fieldId('dueDate')" v-model="form.dueDate" name="dueDate" type="date" required max="9999-12-31"
-          :min="isEditing ? undefined : today" :aria-invalid="showErrors && !!errors.dueDate"
+        <label :for="fieldId('dueDate')">Дата завершення</label>
+        <input :id="fieldId('dueDate')" v-model="form.dueDate" name="dueDate" type="date" max="9999-12-31"
+          :aria-invalid="showErrors && !!errors.dueDate"
           :aria-describedby="describedBy('dueDate', true)" />
-        <small :id="fieldId('dueDate-hint')">{{ dateHint }}</small>
+        <small :id="fieldId('dueDate-hint')">Необов'язкове поле. Залиште порожнім для завдання без терміну.</small>
         <p v-if="showErrors && errors.dueDate" :id="fieldId('dueDate-error')" class="tf4-error" role="alert">{{ errors.dueDate }}</p>
       </div>
       <div class="tf4-preview tf4-field--wide" aria-live="polite" aria-atomic="true">

@@ -9,11 +9,6 @@ export const taskState = reactive({
   tasks: initialTasks.map(task => ({ category: 'study', ...task })),
 });
 
-export function localToday() {
-  const date = new Date();
-  return `${String(date.getFullYear()).padStart(4, '0')}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-}
-
 export function validDate(value) {
   if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
   const date = new Date(`${value}T12:00:00`);
@@ -21,7 +16,7 @@ export function validDate(value) {
     && `${String(date.getFullYear()).padStart(4, '0')}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}` === value;
 }
 
-export function getTaskErrors(data, { editingTask = null, today = localToday() } = {}) {
+export function getTaskErrors(data, { editingTask = null } = {}) {
   const errors = {};
   const title = typeof data?.title === 'string' ? data.title.trim() : '';
   const description = typeof data?.description === 'string' ? data.description.trim() : '';
@@ -33,14 +28,11 @@ export function getTaskErrors(data, { editingTask = null, today = localToday() }
     errors.title = 'Завдання з такою назвою вже існує.';
   }
 
-  if (description.length > 300) errors.description = 'Опис не повинен перевищувати 300 символів.';
+  if (description.length > 500) errors.description = 'Опис не повинен перевищувати 500 символів.';
   if (!allowedStatuses.includes(data?.status)) errors.status = 'Оберіть коректний статус.';
   if (!allowedPriorities.includes(data?.priority)) errors.priority = 'Оберіть коректний пріоритет.';
   if (!allowedCategories.includes(data?.category)) errors.category = 'Оберіть коректну категорію.';
-  if (!validDate(data?.dueDate)) errors.dueDate = 'Укажіть коректну дату завершення.';
-  else if (data.dueDate < today && (!editingTask || data.dueDate !== editingTask.dueDate)) {
-    errors.dueDate = 'Оберіть сьогоднішню або майбутню дату.';
-  }
+  if (data?.dueDate && !validDate(data.dueDate)) errors.dueDate = 'Укажіть коректну дату завершення.';
   return errors;
 }
 
@@ -53,7 +45,7 @@ function normalizeTaskData(data, editingTask = null) {
     status: data.status,
     priority: data.priority,
     category: data.category,
-    dueDate: data.dueDate,
+    dueDate: data.dueDate || '',
   };
 }
 
@@ -62,13 +54,13 @@ export function addTask(data) {
   if (!normalized) return null;
   const nextId = taskState.tasks.reduce((maxId, task) => Math.max(maxId, task.id), 0) + 1;
   const newTask = { id: nextId, ...normalized };
-  taskState.tasks.push(newTask);
+  taskState.tasks.unshift(newTask);
   return newTask;
 }
 
 export function updateTask(data) {
   if (!data || typeof data !== 'object') return null;
-  const task = taskState.tasks.find(item => item.id === data.id);
+  const task = taskState.tasks.find(item => item.id === Number(data.id));
   if (!task) return null;
   const normalized = normalizeTaskData(data, task);
   if (!normalized) return null;
@@ -77,13 +69,24 @@ export function updateTask(data) {
 }
 
 export function setTaskStatus({ id, status } = {}) {
-  if (!allowedStatuses.includes(status)) return;
-  const task = taskState.tasks.find(item => item.id === id);
-  if (task) task.status = status;
+  if (!allowedStatuses.includes(status)) return false;
+  const task = taskState.tasks.find(item => item.id === Number(id));
+  if (!task) return false;
+  task.status = status;
+  return true;
 }
 
 export function setTaskPriority({ id, priority } = {}) {
-  if (!allowedPriorities.includes(priority)) return;
-  const task = taskState.tasks.find(item => item.id === id);
-  if (task) task.priority = priority;
+  if (!allowedPriorities.includes(priority)) return false;
+  const task = taskState.tasks.find(item => item.id === Number(id));
+  if (!task) return false;
+  task.priority = priority;
+  return true;
+}
+
+export function deleteTask(id) {
+  const index = taskState.tasks.findIndex(task => task.id === Number(id));
+  if (index === -1) return false;
+  taskState.tasks.splice(index, 1);
+  return true;
 }

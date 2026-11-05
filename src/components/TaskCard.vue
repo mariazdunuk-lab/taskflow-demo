@@ -8,7 +8,7 @@ const props = defineProps({
   task: { type: Object, required: true },
   editable: { type: Boolean, default: false },
 });
-const emit = defineEmits(['status-change', 'priority-change', 'task-select', 'edit']);
+const emit = defineEmits(['status-change', 'priority-change', 'task-select', 'edit', 'delete']);
 const categoryLabel = computed(() => ({ study: 'Навчання', work: 'Робота', personal: 'Особисте' }[props.task.category] ?? 'Навчання'));
 const titleId = useId();
 const statuses = ['todo', 'progress', 'done'];
@@ -38,7 +38,7 @@ function changePriority() {
         <h3 :id="titleId" class="tf3-card-title">{{ task.title }}</h3>
         <StatusBadge :status="task.status" />
       </div>
-      <p class="tf3-card-description">{{ task.description }}</p>
+      <p class="tf3-card-description">{{ task.description || 'Без опису' }}</p>
       <div class="tf3-card-meta">
         <div class="tf3-meta-item"><span class="tf3-meta-label">Категорія</span><span class="tf3-meta-date">{{ categoryLabel }}</span></div>
         <div class="tf3-meta-item"><span class="tf3-meta-label">Пріоритет</span><PriorityBadge :priority="task.priority" /></div>
@@ -49,6 +49,7 @@ function changePriority() {
         <button type="button" class="tf3-action" @click="changePriority">Змінити пріоритет</button>
         <button type="button" class="tf3-action" @click="emit('task-select', { id: task.id })">Докладніше</button>
         <button v-if="editable" type="button" class="tf3-action" @click="emit('edit', task.id)">Редагувати</button>
+        <button v-if="editable" type="button" class="tf3-action tf5-danger" @click="emit('delete', task.id)">Видалити</button>
       </div>
     </f7-card-content>
   </f7-card>
