@@ -6,10 +6,13 @@ defineProps({
   status: { type: String, default: 'all' },
   priority: { type: String, default: 'all' },
   sort: { type: String, default: 'newest' },
+  project: { type: String, default: 'all' },
+  projects: { type: Array, required: true },
+  onlyWithoutDueDate: { type: Boolean, default: false },
   onlyIncomplete: { type: Boolean, default: false },
 });
 const emit = defineEmits([
-  'update:search', 'update:status', 'update:priority', 'update:sort', 'update:onlyIncomplete', 'reset',
+  'update:search', 'update:status', 'update:priority', 'update:sort', 'update:onlyIncomplete', 'update:project', 'update:onlyWithoutDueDate', 'reset',
 ]);
 const prefix = useId();
 </script>
@@ -44,6 +47,13 @@ const prefix = useId();
           <option value="low">Низький</option>
         </select>
       </div>
+      <div class="tf5-control">
+        <label :for="`${prefix}-project`">Проєкт</label>
+        <select :id="`${prefix}-project`" :value="project" @change="emit('update:project', $event.target.value)">
+          <option value="all">Усі проєкти</option>
+          <option v-for="item in projects" :key="item.id" :value="item.id">{{ item.title }}</option>
+        </select>
+      </div>
       <div class="tf5-control tf5-sort">
         <label :for="`${prefix}-sort`">Сортування</label>
         <select :id="`${prefix}-sort`" :value="sort" @change="emit('update:sort', $event.target.value)">
@@ -60,6 +70,8 @@ const prefix = useId();
     <div class="tf5-controls-actions">
       <button type="button" class="tf5-btn" :class="{ 'is-active': onlyIncomplete }" :aria-pressed="onlyIncomplete"
         @click="emit('update:onlyIncomplete', !onlyIncomplete)">Тільки невиконані</button>
+      <button type="button" class="tf5-btn" :class="{ 'is-active': onlyWithoutDueDate }" :aria-pressed="onlyWithoutDueDate"
+        @click="emit('update:onlyWithoutDueDate', !onlyWithoutDueDate)">Лише без терміну</button>
       <button type="button" class="tf5-btn" @click="emit('reset')">Скинути фільтри</button>
     </div>
   </section>

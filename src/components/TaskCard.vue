@@ -7,6 +7,7 @@ import { formatDueDate } from '../utils/tasks.js';
 const props = defineProps({
   task: { type: Object, required: true },
   editable: { type: Boolean, default: false },
+  projectTitle: { type: String, default: 'Загальні' },
 });
 const emit = defineEmits(['status-change', 'priority-change', 'task-select', 'edit', 'delete']);
 const categoryLabel = computed(() => ({ study: 'Навчання', work: 'Робота', personal: 'Особисте' }[props.task.category] ?? 'Навчання'));
@@ -39,6 +40,7 @@ function changePriority() {
         <StatusBadge :status="task.status" />
       </div>
       <p class="tf3-card-description">{{ task.description || 'Без опису' }}</p>
+      <p class="tf6-card-project">Проєкт: <strong>{{ projectTitle }}</strong></p>
       <div class="tf3-card-meta">
         <div class="tf3-meta-item"><span class="tf3-meta-label">Категорія</span><span class="tf3-meta-date">{{ categoryLabel }}</span></div>
         <div class="tf3-meta-item"><span class="tf3-meta-label">Пріоритет</span><PriorityBadge :priority="task.priority" /></div>

@@ -5,7 +5,12 @@ import PriorityBadge from './PriorityBadge.vue';
 import { getTaskErrors } from '../store/tasks.js';
 import { formatDueDate } from '../utils/tasks.js';
 
-const props = defineProps({ task: { type: Object, default: null } });
+const props = defineProps({
+  task: { type: Object, default: null },
+  projects: { type: Array, required: true },
+  existingTasks: { type: Array, default: () => [] },
+  defaultProject: { type: String, default: 'general' },
+});
 const emit = defineEmits(['save', 'cancel']);
 const prefix = useId();
 const titleInput = ref(null);
@@ -13,7 +18,7 @@ const formElement = ref(null);
 const showErrors = ref(false);
 const isEditing = computed(() => props.task !== null);
 const defaults = () => ({
-  title: '', description: '', status: 'todo', priority: 'medium', category: 'study', dueDate: '',
+  title: '', description: '', status: 'todo', priority: 'medium', category: 'study', dueDate: '', projectId: props.defaultProject,
 });
 const form = reactive({
   title: props.task?.title ?? '',
@@ -22,9 +27,10 @@ const form = reactive({
   priority: props.task?.priority ?? 'medium',
   category: props.task?.category ?? 'study',
   dueDate: props.task?.dueDate ?? '',
+  projectId: props.task?.projectId ?? props.defaultProject,
 });
 const categories = { study: 'Навчання', work: 'Робота', personal: 'Особисте' };
-const errors = computed(() => getTaskErrors(form, { editingTask: props.task }));
+const errors = computed(() => getTaskErrors(form, { editingTask: props.task, tasks: props.existingTasks, projects: props.projects }));
 const titleRemaining = computed(() => 80 - form.title.length);
 const descriptionRemaining = computed(() => 500 - form.description.length);
 
@@ -65,6 +71,7 @@ async function submitForm() {
     priority: form.priority,
     category: form.category,
     dueDate: form.dueDate,
+    projectId: form.projectId,
   });
 }
 
@@ -134,6 +141,14 @@ defineExpose({ focusTitle });
         <small :id="fieldId('dueDate-hint')">Необов'язкове поле. Залиште порожнім для завдання без терміну.</small>
         <p v-if="showErrors && errors.dueDate" :id="fieldId('dueDate-error')" class="tf4-error" role="alert">{{ errors.dueDate }}</p>
       </div>
+      <div class="tf4-field tf4-field--wide">
+        <label :for="fieldId('projectId')">Проєкт</label>
+        <select :id="fieldId('projectId')" v-model="form.projectId" name="projectId"
+          :aria-invalid="showErrors && !!errors.projectId" :aria-describedby="describedBy('projectId')">
+          <option v-for="project in projects" :key="project.id" :value="project.id">{{ project.title }}</option>
+        </select>
+        <p v-if="showErrors && errors.projectId" :id="fieldId('projectId-error')" class="tf4-error" role="alert">{{ errors.projectId }}</p>
+      </div>
       <div class="tf4-preview tf4-field--wide" aria-live="polite" aria-atomic="true">
         <strong>Попередній перегляд</strong>
         <h3>{{ form.title || 'Назва нового завдання' }}</h3>
@@ -142,6 +157,7 @@ defineExpose({ focusTitle });
           <StatusBadge :status="form.status" />
           <PriorityBadge :priority="form.priority" />
           <span>{{ categories[form.category] }}</span>
+          <span>Проєкт: {{ projects.find(project => project.id === form.projectId)?.title ?? 'Загальні' }}</span>
           <span>Термін: {{ formatDueDate(form.dueDate) }}</span>
         </div>
       </div>
